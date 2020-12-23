@@ -17,15 +17,21 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      Nombre: ''
+      NombreCompleto: '',
+      Cedula: '',
+      Email: '',
+      Password: '',
+      Telefono: '' 
     });
      
   }
 
-  submit() {
-
-    alert("Mi Nombre es: " + this.form.get("Nombre").value);
-
+  GuardarCambios() { 
+    alert("Mi Nombre es: " + this.form.get("NombreCompleto").value);
+    alert("Mi Cedula es: " + this.form.get("Cedula").value);
+    alert("Mi Email es: " + this.form.get("Email").value);
+    alert("Mi Password es: " + this.form.get("Password").value);
+    alert("Mi Telefono es: " + this.form.get("Telefono").value);
   }
 
 }
