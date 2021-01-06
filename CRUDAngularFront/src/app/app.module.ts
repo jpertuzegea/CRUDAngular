@@ -10,18 +10,19 @@ import { InicioComponent } from './Modules/Administracion/inicio/inicio.componen
 import { WorkSpaceComponent } from './Share/work-space/work-space.component';
 import { FooterComponent } from './Share/footer/footer.component';
 import { ModalComponent } from './Share/Modal/modal/modal.component';
-import { AgregarComponent } from './Modules/Administracion/usuarios/agregar/agregar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    NavBarComponent, UsuariosComponent, InicioComponent, WorkSpaceComponent, FooterComponent, ModalComponent, AgregarComponent
+    NavBarComponent, UsuariosComponent, InicioComponent, WorkSpaceComponent, FooterComponent, ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

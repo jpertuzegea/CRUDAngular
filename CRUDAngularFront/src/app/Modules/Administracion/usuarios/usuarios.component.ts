@@ -1,6 +1,9 @@
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from '../../../Services/services.service';
+import { error } from '@angular/compiler/src/util';
+import { UsuarioDTO } from '../../../Models/UsuarioDTO';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,27 +14,52 @@ import { Component, OnInit } from '@angular/core';
 export class UsuariosComponent implements OnInit {
   showModal = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private Service: ServicesService) { }
   form: FormGroup;
+
+  Lista: UsuarioDTO[];
 
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      NombreCompleto: '',
-      Cedula: '',
-      Email: '',
-      Password: '',
-      Telefono: '' 
-    });
-     
+
+    this.ListarTodosUsuarios();
+
+    this.form = this.formBuilder.group(
+      {
+        NombreCompleto: '',
+        Cedula: '',
+        Email: '',
+        Password: '',
+        Telefono: ''
+      }
+    );
   }
 
-  GuardarCambios() { 
-    alert("Mi Nombre es: " + this.form.get("NombreCompleto").value);
-    alert("Mi Cedula es: " + this.form.get("Cedula").value);
-    alert("Mi Email es: " + this.form.get("Email").value);
-    alert("Mi Password es: " + this.form.get("Password").value);
-    alert("Mi Telefono es: " + this.form.get("Telefono").value);
+  GuardarUsuario() {
+    this.Service.SaveUser().subscribe(
+      Usuarios => {
+        this.Lista = Usuarios;
+      }, error => {
+        alert(error);
+      }
+    );
   }
 
+  ListarTodosUsuarios() {
+    this.Service.GetAllUsers().subscribe(
+      Usuarios => {
+         this.Lista = Usuarios;
+      }, error => {
+        alert(error);
+      }
+    );
+  }
+
+  ModificarUsuario() {
+    //this.Service.UpdateUser();
+  }
+
+  GetUserByUserId(id: number) {
+    //this.Service.GetUserByUserId(id);
+  }
 }

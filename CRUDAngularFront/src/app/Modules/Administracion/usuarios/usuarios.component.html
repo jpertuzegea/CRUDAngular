@@ -89,25 +89,25 @@
 
               <tbody>
 
-                <tr>
+                <tr *ngFor="let item of Lista">
                   <td>
                     <img class="img-responsive" width="60" height="60" src="" />
                   </td>
 
                   <td>
-                    Jorge Pertuz
+                    {{item.nombre}}
                   </td>
                   <td>
-                    Jpertuz
+                    {{item.apellido}}
                   </td>
                   <td>
-                    123456
+                    {{item.cedula}}
                   </td>
                   <td>
-                    jpertuzegea@hotmail.com
+                    {{item.email}}
                   </td>
                   <td>
-                    3155342264
+                    {{item.telefono}}
                   </td>
                   <td>
                     Desarrollo
@@ -176,7 +176,7 @@
     <div class="modal-content animated flipInY">
       <div id="contenido">
 
-        <form (submit)="GuardarCambios()" [formGroup]="form">
+        <form (submit)="ListarTodosUsuarios()" [formGroup]="form">
           <div class="modal-header">
             <button (click)="showModal=false" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 style="color:#1ab394" class="modal-title">Formulario de Registro de Usuarios</h4>
