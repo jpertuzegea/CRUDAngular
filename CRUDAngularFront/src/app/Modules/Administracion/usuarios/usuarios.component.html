@@ -56,29 +56,24 @@
               <thead>
                 <tr>
                   <th>
-                    Imagen
+                    Id
                   </th>
                   <th>
                     Nombre Usuario
                   </th>
                   <th>
-                    Usuario de Red
+                    Apellido
                   </th>
                   <th>
                     Cedula
                   </th>
                   <th>
-                    Email
-                  </th>
-                  <th>
                     Telefono
                   </th>
                   <th>
-                    Dependencia
+                    Genero
                   </th>
-                  <th>
-                    Estado
-                  </th>
+
                   <th>
                   </th>
                   <th>
@@ -91,29 +86,22 @@
 
                 <tr *ngFor="let item of Lista">
                   <td>
-                    <img class="img-responsive" width="60" height="60" src="" />
-                  </td>
-
+                    {{item.UsuarioId}}
+                  </td> 
                   <td>
-                    {{item.nombre}}
-                  </td>
-                  <td>
-                    {{item.apellido}}
+                    {{item.Nombre}}
                   </td>
                   <td>
-                    {{item.cedula}}
+                    {{item.Apellido}}
                   </td>
                   <td>
-                    {{item.email}}
+                    {{item.Cedula}}
                   </td>
                   <td>
-                    {{item.telefono}}
+                    {{item.Telefono}}
                   </td>
                   <td>
-                    Desarrollo
-                  </td>
-                  <td>
-                    Activo
+                    {{item.Genero}}
                   </td>
                   <td>
                     <a href="#myModal2" onclick="" data-toggle="modal" id="1"><i class="fa fa-edit"></i></a>
@@ -127,34 +115,29 @@
               <tfoot>
                 <tr>
                   <th>
-                    Imagen
+                    Id
                   </th>
                   <th>
                     Nombre Usuario
                   </th>
                   <th>
-                    Usuario de Red
+                    Apellido
                   </th>
-
                   <th>
                     Cedula
-                  </th>
-                  <th>
-                    Email
                   </th>
                   <th>
                     Telefono
                   </th>
                   <th>
-                    Dependencia
+                    Genero
                   </th>
-                  <th>
-                    Estado
-                  </th>
+
                   <th>
                   </th>
                   <th>
                   </th>
+
                 </tr>
               </tfoot>
             </table>
@@ -188,23 +171,18 @@
                 <h3 class="m-t-none m-b"></h3>
 
                 <div class="form-group">
-                  <label>Nombre Completo </label>
-                  <input type="text" class="form-control" formControlName="NombreCompleto" />
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" formControlName="Nombre" />
+                </div>
+
+                <div class="form-group">
+                  <label>Apellido </label>
+                  <input type="text" class="form-control" formControlName="Apellido" />
                 </div>
 
                 <div class="form-group">
                   <label>Cedula </label>
                   <input type="text" class="form-control" formControlName="Cedula" />
-                </div>
-
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="text" class="form-control" formControlName="Email" />
-                </div>
-
-                <div class="form-group">
-                  <label>Password </label>
-                  <input type="text" class="form-control" formControlName="Password" />
                 </div>
                  
               </div>
@@ -213,11 +191,15 @@
                 <br>
 
                 <div class="form-group">
-                  <label>Telefono</label>
-                  <input type="text" class="form-control"  formControlName="Telefono"/>
+                  <label>Telefono </label>
+                  <input type="text" class="form-control" formControlName="Telefono" />
                 </div>
 
-               
+                <div class="form-group">
+                  <label>Genero </label>
+                  <input type="text" class="form-control" formControlName="Genero" />
+                </div>
+
               </div>
 
 

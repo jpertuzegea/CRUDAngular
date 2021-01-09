@@ -18,14 +18,12 @@ export class ServicesService {
   }
 
   public GetAllUsers(): Observable<any[]> {
-    return this.http.get<UsuarioDTO[]>("http://localhost:57950/api/jorge");
+    return this.http.get<UsuarioDTO[]>("http://localhost:51538/api/POC");
   }
 
   public SaveUser(): Observable<UsuarioDTO[]> {
-    return this.http.post<UsuarioDTO[]>("http://localhost:57950/api/jorge", "",
-      {
-        
-
+    return this.http.post<UsuarioDTO[]>("http://localhost:51538/api/POC", "",
+      { 
     });
   }
 

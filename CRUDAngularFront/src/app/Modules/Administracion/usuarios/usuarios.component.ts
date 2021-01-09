@@ -25,12 +25,13 @@ export class UsuariosComponent implements OnInit {
     this.ListarTodosUsuarios();
 
     this.form = this.formBuilder.group(
-      {
-        NombreCompleto: '',
+      { 
+        UsuarioId: '',
+        Nombre: '',
+        Apellido: '',
         Cedula: '',
-        Email: '',
-        Password: '',
-        Telefono: ''
+        Telefono: '',
+        Genero: ''
       }
     );
   }
@@ -48,9 +49,9 @@ export class UsuariosComponent implements OnInit {
   ListarTodosUsuarios() {
     this.Service.GetAllUsers().subscribe(
       Usuarios => {
-         this.Lista = Usuarios;
+        this.Lista = Usuarios;
       }, error => {
-        alert(error);
+        alert(JSON.stringify(error));
       }
     );
   }
