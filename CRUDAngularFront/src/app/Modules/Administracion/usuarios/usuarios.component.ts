@@ -37,6 +37,18 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
+  GuardarCambios() {
+    if (this.Accion == "Registro") {
+      this.GuardarUsuario();
+    }
+
+    if (this.Accion == "Modificacion") {
+      this.ModificarUsuario();
+    }
+  }
+
+
+
   GuardarUsuario() {
     let Usuario = new UsuarioDTO();
     Usuario.UsuarioId = this.form.get("UsuarioId").value;
@@ -80,20 +92,54 @@ export class UsuariosComponent implements OnInit {
   }
 
   ModificarUsuario() {
-    //this.Service.UpdateUser();
+    let Usuario = new UsuarioDTO();
+    Usuario.UsuarioId = this.form.get("UsuarioId").value;
+    Usuario.Nombre = this.form.get("Nombre").value;
+    Usuario.Apellido = this.form.get("Apellido").value;
+    Usuario.Cedula = this.form.get("Cedula").value;
+    Usuario.Telefono = this.form.get("Telefono").value;
+    Usuario.Genero = this.form.get("Genero").value;
+
+    alert(JSON.stringify(Usuario));
+
+    this.Service.UpdateUser(Usuario).subscribe(
+      Usuarios => {
+
+        if (Usuarios) {
+
+          alert("Usuario Modificado con exito");
+          this.ListarTodosUsuarios();
+          this.MostrarModal(false, "Registro");
+
+          this.form.controls['UsuarioId'].setValue("");
+          this.form.controls['Nombre'].setValue("");
+          this.form.controls['Apellido'].setValue("");
+          this.form.controls['Cedula'].setValue("");
+          this.form.controls['Telefono'].setValue("");
+          this.form.controls['Genero'].setValue("");
+
+        } else {
+          alert("Usuario NO Modificado con exito");
+        }
+      }, error => {
+        alert(JSON.stringify(error));
+      }
+    );
+
+
+
   }
 
   GetUserByUserId(id: number) {
     this.Service.GetUserByUserId(id).subscribe(
       Usuario => {
-        alert(JSON.stringify(Usuario));
         let User = Usuario as UsuarioDTO;
         this.form.controls['UsuarioId'].setValue(User.UsuarioId);
         this.form.controls['Nombre'].setValue(User.Nombre);
         this.form.controls['Apellido'].setValue(User.Apellido);
         this.form.controls['Cedula'].setValue(User.Cedula);
         this.form.controls['Telefono'].setValue(User.Telefono);
-        this.form.controls['Genero'].setValue(User.Genero); 
+        this.form.controls['Genero'].setValue(User.Genero);
       }, error => {
         alert(JSON.stringify(error));
       }

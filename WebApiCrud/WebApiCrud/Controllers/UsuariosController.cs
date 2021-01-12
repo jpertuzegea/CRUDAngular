@@ -13,7 +13,7 @@ namespace WebApiCrud.Controllers
     public class UsuariosController : Controller
     {
         [HttpPost("GuardarUsuario")]
-        public ActionResult<bool> GuardarUsuario(Usuarios Usuario)
+        public ActionResult<bool> GuardarUsuario([FromBody] Usuarios Usuario)
         {
             PocCrudContext BD = new PocCrudContext();
             BD.Usuarios.Add(Usuario);
@@ -38,11 +38,11 @@ namespace WebApiCrud.Controllers
         public ActionResult<Usuarios> ListarUsuariosById([FromBody] int UsuarioId)
         {
             PocCrudContext BD = new PocCrudContext();
-            return BD.Usuarios.Where(x => x.UsuarioId == UsuarioId).FirstOrDefault(); 
+            return BD.Usuarios.Where(x => x.UsuarioId == UsuarioId).FirstOrDefault();
         }
 
-        [HttpPut("")]
-        public ActionResult<bool> ModificarUsuario(Usuarios Usuario)
+        [HttpPut("ModificarUsuario")]
+        public ActionResult<bool> ModificarUsuario([FromBody] Usuarios Usuario)
         {
             PocCrudContext BD = new PocCrudContext();
             Usuarios usu = BD.Usuarios.Where(x => x.UsuarioId == Usuario.UsuarioId).FirstOrDefault();
