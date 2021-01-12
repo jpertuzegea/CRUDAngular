@@ -25,8 +25,8 @@ export class ServicesService {
     return this.http.post("http://localhost:51538/api/POC/GuardarUsuario", UsuarioDTO);
   }
 
-  public UpdateUser() {
-    alert("Entro a UpdateUser");
+  public UpdateUser(UsuarioDTO: UsuarioDTO) {
+    return this.http.put("http://localhost:51538/api/POC/ModificarUsuario", UsuarioDTO);
   }
 
 }
