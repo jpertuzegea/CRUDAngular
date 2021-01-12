@@ -13,8 +13,8 @@ export class ServicesService {
   constructor(private http: HttpClient) { }
 
   // --------------------- usuarios ---------------------
-  public GetUserByUserId(id: number) {
-    alert("Entro a GetUserByUserId");
+  public GetUserByUserId(id: number) { 
+    return this.http.post("http://localhost:51538/api/POC/ListarUsuariosById", id);
   }
 
   public GetAllUsers(): Observable<any[]> {

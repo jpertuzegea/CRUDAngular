@@ -3,7 +3,7 @@
   <div class="col-lg-10">
     <br>
 
-    <a data-toggle="modal" class="btn btn-primary" id="btn_nuevo_usuario" (click)="showModal=true">Nuevo Usuario</a>
+    <a data-toggle="modal" class="btn btn-primary" id="btn_nuevo_usuario" (click)="MostrarModal(true,'Regitro')">Nuevo Usuario</a>
 
   </div>
 
@@ -87,7 +87,7 @@
                 <tr *ngFor="let item of Lista">
                   <td>
                     {{item.UsuarioId}}
-                  </td> 
+                  </td>
                   <td>
                     {{item.Nombre}}
                   </td>
@@ -104,7 +104,7 @@
                     {{item.Genero}}
                   </td>
                   <td>
-                    <a href="#myModal2" onclick="" data-toggle="modal" id="1"><i class="fa fa-edit"></i></a>
+                    <a (click)="VerUsuario(1)" data-toggle="modal" id="{{item.UsuarioId}}"><i class="fa fa-edit"></i></a>
                   </td>
                   <td>
                     <a href="#myModal2" onclick="" title="Agregar Roles al Usuario" data-toggle="modal" id="1"><i class="fa fa-cogs"></i></a>
@@ -162,13 +162,15 @@
         <form (submit)="GuardarUsuario()" [formGroup]="form">
           <div class="modal-header">
             <button (click)="showModal=false" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 style="color:#1ab394" class="modal-title">Formulario de Registro de Usuarios</h4>
+            <h4 style="color:#1ab394" class="modal-title">Formulario de {{Accion}} de Usuarios</h4>
           </div>
 
           <div class="modal-body">
             <div class="row">
               <div class="col-sm-6 b-r">
                 <h3 class="m-t-none m-b"></h3>
+                 
+                <input type="hidden" class="form-control" formControlName="UsuarioId" />
 
                 <div class="form-group">
                   <label>Nombre</label>
@@ -184,7 +186,7 @@
                   <label>Cedula </label>
                   <input type="text" class="form-control" formControlName="Cedula" />
                 </div>
-                 
+
               </div>
 
               <div class="col-sm-6 ">

@@ -16,6 +16,7 @@ export class UsuariosComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private Service: ServicesService) { }
   form: FormGroup;
+  Accion = "Registro";
 
   Lista: UsuarioDTO[];
 
@@ -37,7 +38,6 @@ export class UsuariosComponent implements OnInit {
   }
 
   GuardarUsuario() {
-
     let Usuario = new UsuarioDTO();
     Usuario.UsuarioId = this.form.get("UsuarioId").value;
     Usuario.Nombre = this.form.get("Nombre").value;
@@ -51,14 +51,14 @@ export class UsuariosComponent implements OnInit {
         if (Usuarios) {
           alert("Usuario creado con exito");
           this.ListarTodosUsuarios();
-          this.showModal = false;
-           
+          this.MostrarModal(false, "Registro");
+
           this.form.controls['UsuarioId'].setValue("");
           this.form.controls['Nombre'].setValue("");
           this.form.controls['Apellido'].setValue("");
           this.form.controls['Cedula'].setValue("");
           this.form.controls['Telefono'].setValue("");
-          this.form.controls['Genero'].setValue(""); 
+          this.form.controls['Genero'].setValue("");
 
         } else {
           alert("Usuario NO creado con exito");
@@ -84,6 +84,33 @@ export class UsuariosComponent implements OnInit {
   }
 
   GetUserByUserId(id: number) {
-    //this.Service.GetUserByUserId(id);
+    this.Service.GetUserByUserId(id).subscribe(
+      Usuario => {
+        alert(JSON.stringify(Usuario));
+        let User = Usuario as UsuarioDTO;
+        this.form.controls['UsuarioId'].setValue(User.UsuarioId);
+        this.form.controls['Nombre'].setValue(User.Nombre);
+        this.form.controls['Apellido'].setValue(User.Apellido);
+        this.form.controls['Cedula'].setValue(User.Cedula);
+        this.form.controls['Telefono'].setValue(User.Telefono);
+        this.form.controls['Genero'].setValue(User.Genero); 
+      }, error => {
+        alert(JSON.stringify(error));
+      }
+    );
+  }
+
+
+  VerUsuario(id: number) {
+    this.Accion = "Modificacion";
+    this.MostrarModal(true, "Modificacion");
+    this.GetUserByUserId(id);
+  }
+
+
+  MostrarModal(ver: boolean, Accion: string) {
+    this.showModal = ver;
+    this.Accion = Accion;
   }
 }
+

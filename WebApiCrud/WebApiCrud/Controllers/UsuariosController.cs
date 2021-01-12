@@ -34,11 +34,11 @@ namespace WebApiCrud.Controllers
             return BD.Usuarios.ToList();
         }
 
-        [HttpPost("")]
-        public ActionResult<Usuarios> ListarUsuariosById(int UsuarioId)
+        [HttpPost("ListarUsuariosById")]
+        public ActionResult<Usuarios> ListarUsuariosById([FromBody] int UsuarioId)
         {
             PocCrudContext BD = new PocCrudContext();
-            return BD.Usuarios.Where(x => x.UsuarioId == UsuarioId).FirstOrDefault();
+            return BD.Usuarios.Where(x => x.UsuarioId == UsuarioId).FirstOrDefault(); 
         }
 
         [HttpPut("")]
@@ -53,7 +53,7 @@ namespace WebApiCrud.Controllers
             usu.Cedula = Usuario.Cedula;
 
             BD.Entry(usu).State = EntityState.Modified;
-           
+
             if (BD.SaveChanges() >= 0)
             {
                 return true;
@@ -77,7 +77,7 @@ namespace WebApiCrud.Controllers
             else
             {
                 return false;
-            } 
+            }
         }
 
     }
