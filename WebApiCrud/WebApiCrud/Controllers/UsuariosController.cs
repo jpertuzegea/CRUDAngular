@@ -12,7 +12,7 @@ namespace WebApiCrud.Controllers
     [Route("api/Poc")]
     public class UsuariosController : Controller
     {
-        [HttpPost("")]
+        [HttpPost("GuardarUsuario")]
         public ActionResult<bool> GuardarUsuario(Usuarios Usuario)
         {
             PocCrudContext BD = new PocCrudContext();

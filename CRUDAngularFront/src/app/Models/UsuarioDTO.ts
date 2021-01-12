@@ -1,6 +1,9 @@
 
-export interface UsuarioDTO {
-  Nombre: string,
-  Apellido: string,
-  Edad: number
+export class UsuarioDTO { 
+  UsuarioId: number;
+  Nombre: string;
+  Apellido: string;
+  Cedula: string;
+  Telefono: string;
+  Genero: string; 
 }

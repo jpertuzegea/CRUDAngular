@@ -25,7 +25,7 @@ export class UsuariosComponent implements OnInit {
     this.ListarTodosUsuarios();
 
     this.form = this.formBuilder.group(
-      { 
+      {
         UsuarioId: '',
         Nombre: '',
         Apellido: '',
@@ -37,11 +37,34 @@ export class UsuariosComponent implements OnInit {
   }
 
   GuardarUsuario() {
-    this.Service.SaveUser().subscribe(
+
+    let Usuario = new UsuarioDTO();
+    Usuario.UsuarioId = this.form.get("UsuarioId").value;
+    Usuario.Nombre = this.form.get("Nombre").value;
+    Usuario.Apellido = this.form.get("Apellido").value;
+    Usuario.Cedula = this.form.get("Cedula").value;
+    Usuario.Telefono = this.form.get("Telefono").value;
+    Usuario.Genero = this.form.get("Genero").value;
+
+    this.Service.SaveUser(Usuario).subscribe(
       Usuarios => {
-        this.Lista = Usuarios;
+        if (Usuarios) {
+          alert("Usuario creado con exito");
+          this.ListarTodosUsuarios();
+          this.showModal = false;
+           
+          this.form.controls['UsuarioId'].setValue("");
+          this.form.controls['Nombre'].setValue("");
+          this.form.controls['Apellido'].setValue("");
+          this.form.controls['Cedula'].setValue("");
+          this.form.controls['Telefono'].setValue("");
+          this.form.controls['Genero'].setValue(""); 
+
+        } else {
+          alert("Usuario NO creado con exito");
+        }
       }, error => {
-        alert(error);
+        alert(JSON.stringify(error));
       }
     );
   }

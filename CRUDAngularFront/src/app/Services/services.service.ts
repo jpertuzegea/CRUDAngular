@@ -21,10 +21,8 @@ export class ServicesService {
     return this.http.get<UsuarioDTO[]>("http://localhost:51538/api/POC");
   }
 
-  public SaveUser(): Observable<UsuarioDTO[]> {
-    return this.http.post<UsuarioDTO[]>("http://localhost:51538/api/POC", "",
-      { 
-    });
+  public SaveUser(UsuarioDTO: UsuarioDTO) { 
+    return this.http.post("http://localhost:51538/api/POC/GuardarUsuario", UsuarioDTO);
   }
 
   public UpdateUser() {
