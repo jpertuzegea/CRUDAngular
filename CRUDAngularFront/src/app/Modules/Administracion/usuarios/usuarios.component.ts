@@ -21,8 +21,7 @@ export class UsuariosComponent implements OnInit {
   Lista: UsuarioDTO[];
 
 
-  ngOnInit(): void {
-
+  ngOnInit(): void { 
     this.ListarTodosUsuarios();
 
     this.form = this.formBuilder.group(
@@ -38,6 +37,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   GuardarCambios() {
+     
     if (this.Accion == "Registro") {
       this.GuardarUsuario();
     }
@@ -46,8 +46,6 @@ export class UsuariosComponent implements OnInit {
       this.ModificarUsuario();
     }
   }
-
-
 
   GuardarUsuario() {
     let Usuario = new UsuarioDTO();
@@ -81,14 +79,10 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  ListarTodosUsuarios() {
-    this.Service.GetAllUsers().subscribe(
-      Usuarios => {
-        this.Lista = Usuarios;
-      }, error => {
-        alert(JSON.stringify(error));
-      }
-    );
+  VerUsuario(id: number) {
+    this.Accion = "Modificacion";
+    this.MostrarModal(true, "Modificacion");
+    this.GetUserByUserId(id);
   }
 
   ModificarUsuario() {
@@ -99,8 +93,6 @@ export class UsuariosComponent implements OnInit {
     Usuario.Cedula = this.form.get("Cedula").value;
     Usuario.Telefono = this.form.get("Telefono").value;
     Usuario.Genero = this.form.get("Genero").value;
-
-    alert(JSON.stringify(Usuario));
 
     this.Service.UpdateUser(Usuario).subscribe(
       Usuarios => {
@@ -125,9 +117,16 @@ export class UsuariosComponent implements OnInit {
         alert(JSON.stringify(error));
       }
     );
+  }
 
-
-
+  ListarTodosUsuarios() {
+    this.Service.GetAllUsers().subscribe(
+      Usuarios => {
+        this.Lista = Usuarios;
+      }, error => {
+        alert(JSON.stringify(error));
+      }
+    );
   }
 
   GetUserByUserId(id: number) {
@@ -146,17 +145,28 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-
-  VerUsuario(id: number) {
-    this.Accion = "Modificacion";
-    this.MostrarModal(true, "Modificacion");
-    this.GetUserByUserId(id);
-  }
-
-
   MostrarModal(ver: boolean, Accion: string) {
     this.showModal = ver;
     this.Accion = Accion;
   }
+
+  EliminarUsuario(id: number) {
+
+    let respuesta = confirm("Esta seguro que desea eliminar el usuario?");
+
+    if (respuesta)
+      this.Service.DeleteUser(id).subscribe(
+        Result => {
+          if (Result) {
+            this.ListarTodosUsuarios();
+            alert("Usuario Eliminado con Exito");
+          }
+        }, error => {
+          alert(JSON.stringify(error));
+        }
+      );
+  }
+
+
 }
 

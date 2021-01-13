@@ -64,8 +64,8 @@ namespace WebApiCrud.Controllers
             }
         }
 
-        [HttpDelete("")]
-        public ActionResult<bool> EliminarUsuario(int UsuarioId)
+        [HttpPost("EliminarUsuario")]
+        public ActionResult<bool> EliminarUsuario([FromBody] int UsuarioId)
         {
             PocCrudContext BD = new PocCrudContext();
             Usuarios usu = BD.Usuarios.Where(x => x.UsuarioId == UsuarioId).FirstOrDefault();
@@ -78,7 +78,6 @@ namespace WebApiCrud.Controllers
             {
                 return false;
             }
-        }
-
+        } 
     }
 }

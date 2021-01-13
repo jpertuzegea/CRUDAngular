@@ -3,7 +3,7 @@
   <div class="col-lg-10">
     <br>
 
-    <a data-toggle="modal" class="btn btn-primary" id="btn_nuevo_usuario" (click)="MostrarModal(true,'Regitro')">Nuevo Usuario</a>
+    <a data-toggle="modal" class="btn btn-primary" id="btn_nuevo_usuario" (click)="MostrarModal(true,'Registro')">Nuevo Usuario</a>
 
   </div>
 
@@ -50,7 +50,7 @@
 
         <div class="ibox-content">
           <div class="table-responsive">
-
+             
             <table class="table table-striped table-bordered table-hover dataTables-example">
 
               <thead>
@@ -104,10 +104,10 @@
                     {{item.Genero}}
                   </td>
                   <td>
-                    <a (click)="VerUsuario(item.UsuarioId)" data-toggle="modal" id="{{item.UsuarioId}}"><i class="fa fa-edit"></i></a>
+                    <a (click)="VerUsuario(item.UsuarioId)" title="Modificar Usuario"data-toggle="modal" id="{{item.UsuarioId}}"><i class="fa fa-edit"></i></a>
                   </td>
                   <td>
-                    <a href="#myModal2" onclick="" title="Agregar Roles al Usuario" data-toggle="modal" id="1"><i class="fa fa-cogs"></i></a>
+                    <a (click)="EliminarUsuario(item.UsuarioId)" title="Eliminar Usuario" data-toggle="modal" id="{{item.UsuarioId}}"><i class="fa fa-times-rectangle-o"></i></a> 
                   </td>
                 </tr>
 

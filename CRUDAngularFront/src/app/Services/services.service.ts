@@ -29,5 +29,9 @@ export class ServicesService {
     return this.http.put("http://localhost:51538/api/POC/ModificarUsuario", UsuarioDTO);
   }
 
+  public DeleteUser(id: number) {
+    return this.http.post("http://localhost:51538/api/POC/EliminarUsuario", id);
+  }
+  
 }
 
