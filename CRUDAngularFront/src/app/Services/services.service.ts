@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UsuarioDTO } from '../Models/UsuarioDTO';
+import { ResultModel } from '../Models/ResultModel';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class ServicesService {
     return this.http.post("http://localhost:51538/api/POC/ListarUsuariosById", id);
   }
 
-  public GetAllUsers(): Observable<any[]> {
-    return this.http.get<UsuarioDTO[]>("http://localhost:51538/api/POC");
+  public GetAllUsers(): Observable<ResultModel> {
+    return this.http.get<ResultModel>("http://localhost:51538/api/POC");
   }
 
   public SaveUser(UsuarioDTO: UsuarioDTO) { 

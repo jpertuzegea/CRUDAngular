@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../../../Services/services.service';
 import { error } from '@angular/compiler/src/util';
 import { UsuarioDTO } from '../../../Models/UsuarioDTO';
+import { ResultModel } from '../../../Models/ResultModel';
 
 @Component({
   selector: 'app-usuarios',
@@ -20,8 +21,8 @@ export class UsuariosComponent implements OnInit {
 
   Lista: UsuarioDTO[];
 
+  ngOnInit(): void {
 
-  ngOnInit(): void { 
     this.ListarTodosUsuarios();
 
     this.form = this.formBuilder.group(
@@ -37,7 +38,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   GuardarCambios() {
-     
+
     if (this.Accion == "Registro") {
       this.GuardarUsuario();
     }
@@ -57,9 +58,10 @@ export class UsuariosComponent implements OnInit {
     Usuario.Genero = this.form.get("Genero").value;
 
     this.Service.SaveUser(Usuario).subscribe(
-      Usuarios => {
-        if (Usuarios) {
-          alert("Usuario creado con exito");
+      ResultModel => {
+        let Resu = ResultModel as ResultModel;
+        if (!Resu.HasError) {
+          alert(Resu.Message);
           this.ListarTodosUsuarios();
           this.MostrarModal(false, "Registro");
 
@@ -71,7 +73,7 @@ export class UsuariosComponent implements OnInit {
           this.form.controls['Genero'].setValue("");
 
         } else {
-          alert("Usuario NO creado con exito");
+          alert(Resu.Message);
         }
       }, error => {
         alert(JSON.stringify(error));
@@ -95,11 +97,12 @@ export class UsuariosComponent implements OnInit {
     Usuario.Genero = this.form.get("Genero").value;
 
     this.Service.UpdateUser(Usuario).subscribe(
-      Usuarios => {
+      ResultModel => {
 
-        if (Usuarios) {
+        let Resu = ResultModel as ResultModel;
+        if (!Resu.HasError) {
 
-          alert("Usuario Modificado con exito");
+          alert(Resu.Message);
           this.ListarTodosUsuarios();
           this.MostrarModal(false, "Registro");
 
@@ -111,7 +114,7 @@ export class UsuariosComponent implements OnInit {
           this.form.controls['Genero'].setValue("");
 
         } else {
-          alert("Usuario NO Modificado con exito");
+          alert(Resu.Message);
         }
       }, error => {
         alert(JSON.stringify(error));
@@ -121,8 +124,16 @@ export class UsuariosComponent implements OnInit {
 
   ListarTodosUsuarios() {
     this.Service.GetAllUsers().subscribe(
-      Usuarios => {
-        this.Lista = Usuarios;
+
+      ResultModel => {
+        let Resu = ResultModel as ResultModel;
+
+        if (!Resu.HasError) {
+          this.Lista = Resu.Data;
+        } else {
+          alert(Resu.Message);
+        }
+
       }, error => {
         alert(JSON.stringify(error));
       }
@@ -131,14 +142,20 @@ export class UsuariosComponent implements OnInit {
 
   GetUserByUserId(id: number) {
     this.Service.GetUserByUserId(id).subscribe(
-      Usuario => {
-        let User = Usuario as UsuarioDTO;
-        this.form.controls['UsuarioId'].setValue(User.UsuarioId);
-        this.form.controls['Nombre'].setValue(User.Nombre);
-        this.form.controls['Apellido'].setValue(User.Apellido);
-        this.form.controls['Cedula'].setValue(User.Cedula);
-        this.form.controls['Telefono'].setValue(User.Telefono);
-        this.form.controls['Genero'].setValue(User.Genero);
+
+      ResultModel => {
+        let Resu = ResultModel as ResultModel;
+
+        if (!Resu.HasError) {
+          let User = Resu.Data as UsuarioDTO;
+          this.form.controls['UsuarioId'].setValue(User.UsuarioId);
+          this.form.controls['Nombre'].setValue(User.Nombre);
+          this.form.controls['Apellido'].setValue(User.Apellido);
+          this.form.controls['Cedula'].setValue(User.Cedula);
+          this.form.controls['Telefono'].setValue(User.Telefono);
+          this.form.controls['Genero'].setValue(User.Genero);
+        }
+
       }, error => {
         alert(JSON.stringify(error));
       }
@@ -156,17 +173,21 @@ export class UsuariosComponent implements OnInit {
 
     if (respuesta)
       this.Service.DeleteUser(id).subscribe(
-        Result => {
-          if (Result) {
+        ResultModel => {
+          let Resu = ResultModel as ResultModel;
+
+          if (!Resu.HasError) {
             this.ListarTodosUsuarios();
-            alert("Usuario Eliminado con Exito");
+            alert(Resu.Message);
+          } else {
+            alert(Resu.Message);
           }
+
         }, error => {
           alert(JSON.stringify(error));
         }
       );
   }
-
 
 }
 
