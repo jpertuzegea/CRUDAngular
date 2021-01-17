@@ -11,11 +11,12 @@ import { WorkSpaceComponent } from './Share/work-space/work-space.component';
 import { FooterComponent } from './Share/footer/footer.component';
 import { ModalComponent } from './Share/Modal/modal/modal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AutorizacionComponent } from './Modules/Administracion/autorizacion/autorizacion.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    NavBarComponent, UsuariosComponent, InicioComponent, WorkSpaceComponent, FooterComponent, ModalComponent
+    NavBarComponent, UsuariosComponent, InicioComponent, WorkSpaceComponent, FooterComponent, ModalComponent, AutorizacionComponent
   ],
   imports: [
     BrowserModule,

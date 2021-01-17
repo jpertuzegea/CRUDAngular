@@ -2,7 +2,6 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../../../Services/services.service';
-import { error } from '@angular/compiler/src/util';
 import { UsuarioDTO } from '../../../Models/UsuarioDTO';
 import { ResultModel } from '../../../Models/ResultModel';
 

@@ -1,10 +1,25 @@
 
+
+
+
+
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
     <br>
 
-    <a data-toggle="modal" class="btn btn-primary" id="btn_nuevo_usuario" (click)="MostrarModal(true,'Registro')">Nuevo Usuario</a>
+    <app-autorizacion [Permiso] ="'CrearUsuario'">
+      <ng-container Autorizado>
+        <a data-toggle="modal" class="btn btn-primary" id="btn_nuevo_usuario" (click)="MostrarModal(true,'Registro')">Nuevo Usuario</a>
 
+      </ng-container>
+
+      <ng-container noAutorizado>
+        NO Autorizado
+      </ng-container>
+
+    </app-autorizacion>
+
+    
   </div>
 
   <div class="col-lg-2">
