@@ -12,9 +12,8 @@ export class SeguridadService {
     return true;
   }
 
-
   ObtenerPermisos(): string[] {
-    return ["Usuariosx", "CrearUsuario", "ListarUsuario", "ModificarUsuario"];
+    return ["Usuarios", "CrearUsuario", "ListarUsuario", "ModificarUsuario"];
   }
 
 }

@@ -10,7 +10,6 @@ export class PuedeVerGuard implements CanActivate {
 
   constructor(private seguridadServices: SeguridadService,
     private route: Router) {
-
   }
 
 
@@ -18,12 +17,14 @@ export class PuedeVerGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
     if (this.seguridadServices.ObtenerPermisos().includes('Usuarios')) {
       return true;
     } else {
       alert("No puedes acceder al recurso");
        this.route.navigate(['/Inicio']);
     }
+
   }
 
 }

@@ -48,6 +48,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   GuardarUsuario() {
+
     let Usuario = new UsuarioDTO();
     Usuario.UsuarioId = this.form.get("UsuarioId").value;
     Usuario.Nombre = this.form.get("Nombre").value;
@@ -63,13 +64,6 @@ export class UsuariosComponent implements OnInit {
           alert(Resu.Message);
           this.ListarTodosUsuarios();
           this.MostrarModal(false, "Registro");
-
-          this.form.controls['UsuarioId'].setValue("");
-          this.form.controls['Nombre'].setValue("");
-          this.form.controls['Apellido'].setValue("");
-          this.form.controls['Cedula'].setValue("");
-          this.form.controls['Telefono'].setValue("");
-          this.form.controls['Genero'].setValue("");
 
         } else {
           alert(Resu.Message);
@@ -104,13 +98,6 @@ export class UsuariosComponent implements OnInit {
           alert(Resu.Message);
           this.ListarTodosUsuarios();
           this.MostrarModal(false, "Registro");
-
-          this.form.controls['UsuarioId'].setValue("");
-          this.form.controls['Nombre'].setValue("");
-          this.form.controls['Apellido'].setValue("");
-          this.form.controls['Cedula'].setValue("");
-          this.form.controls['Telefono'].setValue("");
-          this.form.controls['Genero'].setValue("");
 
         } else {
           alert(Resu.Message);
@@ -153,8 +140,7 @@ export class UsuariosComponent implements OnInit {
           this.form.controls['Cedula'].setValue(User.Cedula);
           this.form.controls['Telefono'].setValue(User.Telefono);
           this.form.controls['Genero'].setValue(User.Genero);
-        }
-
+        } 
       }, error => {
         alert(JSON.stringify(error));
       }
@@ -162,6 +148,10 @@ export class UsuariosComponent implements OnInit {
   }
 
   MostrarModal(ver: boolean, Accion: string) {
+
+    if (!ver) {
+      this.LimpiarCampos();
+    } 
     this.showModal = ver;
     this.Accion = Accion;
   }
@@ -186,6 +176,15 @@ export class UsuariosComponent implements OnInit {
           alert(JSON.stringify(error));
         }
       );
+  }
+
+  LimpiarCampos() {
+    this.form.controls['UsuarioId'].setValue("");
+    this.form.controls['Nombre'].setValue("");
+    this.form.controls['Apellido'].setValue("");
+    this.form.controls['Cedula'].setValue("");
+    this.form.controls['Telefono'].setValue("");
+    this.form.controls['Genero'].setValue("");
   }
 
 }
